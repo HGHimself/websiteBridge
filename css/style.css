@@ -1,0 +1,332 @@
+/*
+*
+*** GLOBAL COLORS
+*
+*/
+
+:root {
+
+  --greenFelt: #076324;
+  --wood: #C1802F;
+  --goldTrim: #D4AF37;
+
+  --lightGrey: #C0C0C0;
+  --grey: #707070;
+  --darkGrey: #606060;
+
+  --lightRed: #BB1C1C;
+  --red: #901C1C;
+  --darkRed: #5D1C1C;
+
+  --lightBlack: #383b3e;
+  --black: #1C1C1C;
+
+  --white: #E0E0E0;
+
+  --lightGreen: #E0FFE0;
+}
+
+
+/*
+*
+*** NAVBAR
+*
+*/
+.topnav {
+  overflow: hidden;
+  background-color: var(--black);
+  border: 2px solid var(--goldTrim);
+  border-radius: 0.3em;
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
+/* Style the topnav links */
+.topnav a {
+  float: left;
+  display: block;
+  color: var(--white);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change color on hover */
+.topnav a:hover {
+  background-color: var(--lightBlack);
+}
+
+.topnav a.active {
+    background-color: var(--red);
+    color: var(--white);
+}
+
+.topnav a:hover:not(.active) {
+    background-color: var(--lightBlack);
+    color: var(--white);
+}
+
+
+/*
+*
+*** HEADER
+*
+*/
+
+/* Header/Blog Title */
+.header {
+  padding: 30px;
+  text-align: center;
+  background: var(--greenFelt);
+  border: 2px solid var(--goldTrim);
+  border-radius: 0.3em;
+}
+
+.header h1 {
+  font-size: 50px;
+}
+
+h1 ,h2 ,h3, h4, h5, h6  {r
+  color: var(--black);
+}
+
+
+/*
+*
+*** BODY
+*
+*/
+* {
+  font-family: "Averia Serif Libre";
+  box-sizing: border-box;
+}
+
+body {
+  padding: 10px;
+  background: var(--wood);
+  background-image:url("https://www.publicdomainpictures.net/pictures/190000/velka/wood-background-02.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+main {
+  background: var(--greenFelt);
+  border: 2px solid var(--goldTrim);
+  border-radius: 0.3em;
+  padding: 1em;
+  margin: auto;
+  /* max-width:1000px;  page is 800 pixels at most */
+  width: 80%;
+}
+
+
+
+/* Create two unequal columns that floats next to each other */
+/* Left column */
+.leftcolumn {
+  float: left;
+  width: 75%;
+}
+
+/* Right column */
+.rightcolumn {
+  float: left;
+  width: 25%;
+  padding-left: 20px;
+}
+
+/* Create two equal columns that floats next to each other */
+.twocolumn {
+  float: left;
+  width: 50%;
+}
+
+/* Create two equal columns that floats next to each other */
+.day {
+  float: left;
+  width: 14.28%;
+  border: 1px solid var(--goldTrim);
+  background-color: var(--white);
+
+}
+
+.dayContainer {
+    width: 100%; /* Set full-width to expand the whole page */
+}
+
+.notMonth {
+  background-color: var(--lightGrey);
+}
+
+.isToday {
+  background-color: var(--lightGreen);
+}
+
+.center {
+  margin: auto;
+}
+
+.centerText {
+  text-align: center;
+}
+
+
+/* Fake image */
+.fakeimg {
+  background-color: #aaa;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Add a card effect for articles */
+.card {
+  background-color: var(--white);
+  padding: 20px;
+  margin-top: 20px;
+  border: 2px solid var(--black);
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.calendar  {
+  background-color: var(--darkGrey);
+  border: 2px solid var(--black);
+}
+
+.dayHeader  {
+  background-color: var(--black);
+  color: var(--white);
+}
+
+.redSuit  {
+  color: var(--red);
+}
+
+.blackSuit  {
+  color: var(--black);
+}
+
+/* TABLE STUFF */
+
+table, th, td {
+  color: var(--white);
+
+
+}
+table {
+  border-collapse: collapse;
+  border: 2px solid var(--goldTrim);
+}
+th, td {
+  border-bottom: 1px solid var(--goldTrim);
+  height: 20px;
+  padding: 10px;
+  text-align: left;
+}
+th {
+  text-align: left;
+  background-color: var(--darkGrey);
+  color: var(--white);
+}
+td {
+  vertical-align: bottom;
+  text: var(--white);
+}
+
+tr:nth-child(even) {background-color: var(--red);}
+tr:nth-child(odd) {background-color: var(--black);}
+tr:hover {background-color: var(--grey);}
+
+
+/* Form stuff */
+form  {
+  font-family: "Averia Serif Libre";
+}
+
+form input, form label, form select {
+  display: inline-block;
+  font-family: "Averia Serif Libre";
+  color: var(--black);
+  border-radius: 5px;
+}
+
+
+form input, form select{
+  border: 2px solid var(--goldTrim);
+  background-color: var(--white);
+}
+
+textarea#textArea {
+	width: 400px;
+	height: 120px;
+	padding: 5px;
+	font-family: Tahoma, sans-serif;
+  order: 2px solid var(--goldTrim);
+  background-color: var(--white);
+  font-family: "Averia Serif Libre";
+}
+
+form button  {
+  font-family : inherit;
+  border-radius: 5px;
+  color: var(--black);
+  border: 2px solid var(--goldTrim);
+  background-color: var(--white);
+}
+
+
+/*
+*
+*** FOOTER
+*
+*/
+.footer {
+  padding: 20px;
+  text-align: center;
+  background: var(--greenFelt);
+  border: 2px solid var(--goldTrim);
+  border-radius: 0.3em;
+  margin-top: 20px;
+}
+
+/*
+*
+*** MEDIA
+*
+*/
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 800px) {
+  .leftcolumn, .rightcolumn {
+    width: 100%;
+    padding: 0;
+  }
+  textarea#textArea {
+    width: 300px;
+  }
+}
+
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 400px) {
+  .navbar a {
+    float: none;
+    width: 100%;
+  }
+  textarea#textArea {
+  	width: 200px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .day {
+    width: 100%;
+    padding: 0;
+  }
+
+}

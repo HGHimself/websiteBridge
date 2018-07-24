@@ -1,0 +1,251 @@
+/* the root holds global colors */
+:root {
+
+    --greenFelt: #076324;
+
+    --goldTrim: #D4AF37;
+
+    --lightGrey: ;
+    --grey: #707070;
+    --darkGrey: #606060;
+
+    --lightRed: #BB1C1C;
+    --red: #901C1C;
+    --darkRed: #5D1C1C;
+
+    --lightBlack: #383b3e;
+    --black: #1C1C1C;
+
+    --white: #DEEADC;
+}
+
+body {
+  background-color: var(--darkGrey);
+  /*background-image:url("https://www.publicdomainpictures.net/pictures/190000/velka/wood-background-02.jpg");
+  */
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+/*
+img {
+    height: auto;
+    max-width: 100%;
+}
+*/
+main {
+    background: var(--greenFelt);
+    border: 2px solid var(--goldTrim);
+    border-radius: 0.3em;
+    padding: 1em;
+    margin: auto;
+    /* max-width:1000px;  page is 800 pixels at most */
+    width: 80%;
+}
+
+/* Form stuff
+#signupform  {
+  background-color: var(--white);
+  border-radius: 10px;
+  border: 2px solid var(--black);
+  width: 40%;
+  font-family: "Averia Serif Libre";
+}
+
+form input, form label, form select {
+  display: inline-block;
+  font-family: "Averia Serif Libre";
+  border-radius: 5px;
+}
+
+
+form input, form select  {
+  border: 2px solid var(--goldTrim);
+  background-color: var(--white);
+}
+*/
+.header {
+  padding: 20px;
+  font-size: 40px;
+  text-align: center;
+  background: var(--white);
+}
+
+/* Create two unequal columns that floats next to each other */
+/* Left column */
+.leftcolumn {
+  float: left;
+  width: 75%;
+}
+
+/* Right column */
+.rightcolumn {
+  float: left;
+  width: 25%;
+  padding-left: 20px;
+}
+
+/* Create two equal columns that floats next to each other */
+.twocolumn {
+    float: left;
+    width: 50%;
+    padding: 10px;
+}
+
+/* Fake image */
+.fakeimg {
+  background-color: #aaa;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Add a card effect for articles */
+.card {
+  background-color: white;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Footer */
+.footer {
+  padding: 20px;
+  text-align: center;
+  background: #ddd;
+  margin-top: 20px;
+}
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 800px) {
+  .leftcolumn, .rightcolumn {
+    width: 100%;
+    padding: 0;
+  }
+}
+
+.center {
+    margin: auto;
+    padding: 10px;
+}
+
+.centerText {
+    text-align: center;
+}
+
+.clearfix {
+    overflow: auto;
+}
+
+.left  {
+  float: left;
+}
+
+.right  {
+  float: right;
+}
+
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+    .twocolumn {
+        width: 100%;
+    }
+}
+
+table, th, td {
+
+    font-family: "Averia Serif Libre";
+    color: var(--white);
+
+}
+table {
+    border-collapse: collapse;
+    border: 2px solid var(--goldTrim);
+}
+th, td {
+    border-bottom: 1px solid var(--goldTrim);
+    height: 20px;
+    padding: 10px;
+    text-align: left;
+}
+th {
+    text-align: left;
+    background-color: var(--darkGrey);
+    color: var(--white);
+}
+td {
+  vertical-align: bottom;
+  text: var(--white);
+}
+
+tr:nth-child(even) {background-color: var(--red);}
+tr:nth-child(odd) {background-color: var(--black);}
+tr:hover {background-color: var(--grey);}
+
+/* Header
+header {
+
+    margin: 20px auto 0px auto;
+}
+
+header h1, header h2 {
+    color: var(--black);
+    font-size: 3em;
+    margin: 1px;
+    text-align: center;
+}
+
+h2, h3, h4, h5, h6  {
+  color: var(--black);
+  font-size: 2em;
+  font-family: 'Averia Serif Libre';
+}
+*/
+
+
+/* Navigation Bar */
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: var(--black);
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+nav li {
+    float: left;
+}
+nav li a {
+    display: block;
+    color: var(--white);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+nav li a:hover {
+    background-color: var(--lightBlack);
+}
+
+/* Footer stuff
+footer {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+footer p {
+    flex: 1;
+}
+footer .footer-text {
+
+    font-size: smaller;
+}
+*/
