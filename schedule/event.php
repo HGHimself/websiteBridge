@@ -13,12 +13,12 @@
         <div class='leftcolumn'>
   				<div class='card'>
   					<h2>Event Page</h2>
-  					<h3><a href="schedule.php">View Weekly Schedule</a></h3>
+  					<h3><a href="<?php echo $pathToRoot; ?>calendar">View Calendar</a></h3>
   				</div>
           <div class='card'>
             <?php
-            if(isset($_GET['post']))  {showEvent($pathToRoot);}
-            else echo "Examine calendar to find a specific event to view."
+            if(isset($_GET['post'])) showEvent($pathToRoot);
+            else printf("Examine calendar <a href='%scalendar'>here</a> to find a specific event to view.", $pathToRoot);
             ?>
           </div>
   			</div>

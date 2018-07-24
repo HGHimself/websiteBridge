@@ -1,7 +1,11 @@
 <?php
 
 //populates the dropdown from months, makes the month from GET selected
-function doMonths($months, $month)  {
+function doMonths()  {
+  $months = $GLOBALS['months'];
+  if(isset($_GET['month']))  $month = $_GET['month'];
+  else $month = "";
+
   foreach($months as $m)  {
     //if the mon is the one from GET, make it selected
     if($m == $month) $selected = "id='month' selected='selected'";
@@ -11,8 +15,22 @@ function doMonths($months, $month)  {
   }
 }
 
+function doLocations()  {
+  $locations = $GLOBALS['locations'];
+  if(isset($_GET['locations']))  $location = $_GET['location'];
+  else $location = "";
+
+  foreach($locations as $l)  {
+    //if the mon is the one from GET, make it selected
+    if($l == $location) $selected = "id='location' selected='selected'";
+    else $selected = '';
+    //add that b
+    printf("<option %s value='%s'>%s</option>", $selected, $l, $l);
+  }
+}
+
 //will create a calendar given a month and year
-function doCalendar($month, $year)  {
+function doCalendar($month, $year, $location)  {
 
 	$months = $GLOBALS['months'];
 	$weekdays = $GLOBALS['weekdays'];
@@ -90,8 +108,8 @@ function doCalendar($month, $year)  {
 
           printf("<div class='day %s' id='%s'>", $class, $id);
             //increment count each time you place down a day
-            printf("<b>%s</b><br>", $count++);
-            showEvents($id, $day);
+            printf("<a href='day.php?day=%s'><b>%s</b></a><br>", $id, $count++);
+            showEvents($id, $day, $location);
             //if youre past the number of days, start current month
           echo "</div>"; //close day div
         }
@@ -126,8 +144,8 @@ function doCalendar($month, $year)  {
           }
 
           printf("<div class='day %s' id='%s'>", $class, $id);
-   	        printf("<b>%s</b><br>", $count++);
-            showEvents($id, $day);
+   	        printf("<a href='day.php?day=%s'><b>%s</b></a><br>", $id, $count++);
+            showEvents($id, $day, $location);
   		    echo "</div>"; //close day div
         }
 		  echo "</div>"; //close row div
@@ -149,12 +167,13 @@ function displayDays($weekdays)  {
   //echo "</div>";
 }
 
-function showEvents($date, $day)  {
+function showEvents($date, $day, $location)  {
 
   //query the db for all reoccurring events at a certain time and day
 	$table = "Events";
   $headers = NULL;
-  $conditions = sprintf("Day='%s' OR Date='%s'", $day, $date);
+  $conditions = sprintf("Location='%s' AND Day='%s' OR Date='%s'", $location, $day, $date);
+
   $result = queryDB($table, $headers, $conditions);
 
 	if ($result->num_rows > 0) {
@@ -170,5 +189,60 @@ function showEvents($date, $day)  {
 		//echo '</ul>';
 	}
 }
+
+function doSingleDay($date)  {
+
+  $dateObj = getdate(strtotime($date));
+  $day = $dateObj['weekday'];
+
+  printf("<div class='dayHeader'><h3 class='centerText'>%s</h3></div>", getTextDate($date));
+
+  $table = "TimeSlots";
+  $headers = NULL;
+  $conditions = sprintf("Day='%s'", $day);
+  $result = queryDB($table, $headers, $conditions);
+
+  if ($result->num_rows > 0) {
+		// output data of each row
+		$times = array();
+		while($row = $result->fetch_assoc()) {
+			array_push($times, $row['Time']);
+		}
+
+		$times = bubbleSort($times);
+
+		foreach($times as $time)  {
+			$printTime = convertTime($time);
+      echo '<h4>' . $printTime . '</h4>';
+			showEvent($date, $day, $time);
+		}
+	}
+  else echo "0 results";
+}
+
+function showEvent($date, $day, $time)  {
+
+
+  //query the db for all reoccurring events at a certain time and day
+	$table = "Events";
+  $headers = NULL;
+  $conditions = sprintf("Day='%s' AND Time='%s' AND Reoccurring='1'", $day, $time);
+  $result = queryDB($table, $headers, $conditions);
+
+	if ($result->num_rows > 0) {
+		// output data of each row
+		//echo '<ul>';
+		while($row = $result->fetch_assoc()) {
+			if($row['Type'] == 'Game') $symbol = $GLOBALS['symbols']['spade'];
+			else if($row['Type'] == 'Lesson') $symbol = $GLOBALS['symbols']['heart'];
+			else if($row['Type'] == 'Other') $symbol = $GLOBALS['symbols']['diamond'];
+			else $symbol = $GLOBALS['symbols']['club'];
+			echo $symbol . "<a href='event.php?post=" . $row['ID'] . "'>" . $row['Name'] . '</a><br>';
+		}
+		//echo '</ul>';
+	}
+}
+
+
 
 ?>

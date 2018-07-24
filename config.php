@@ -6,6 +6,13 @@ $toolsLocation = "tools/";
 
 include $toolsLocation . "connection.php";
 
+global $locations;
+$locations = array(
+          'Honors',
+          'Aces',
+          'Cavendish',
+          );
+
 global $symbols;
 $symbols['spade'] = "<b class='blackSuit'>♠</b>";
 $symbols['heart'] = "<b class='redSuit'>♥</b>";

@@ -24,7 +24,7 @@ if(findLeapYear($year)) $GLOBALS['monthDays']['February'] = '29';
 if(isset($_GET['function']))  {
   if($_GET['function'] == 'doCalendar')  {
     //echo $_GET['month'];
-    doCalendar($_GET['month'], $_GET['year']);
+    doCalendar($_GET['month'], $_GET['year'], $_GET['location']);
   }
 }
 

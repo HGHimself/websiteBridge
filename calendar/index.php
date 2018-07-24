@@ -22,10 +22,13 @@
             <label>Year:</label>
             <input type='number' id='year' name='year' value='<? echo $year; ?>'>
             <input type='submit' value='<'>
-            <select name='location' id='monthSelect' onchange='runAJAX()'>
-              <?php doMonths($months, $month); ?>
+            <select name='month' id='monthSelect' onchange='runAJAX()'>
+              <?php doMonths(); ?>
             </select>
             <input type='submit' value='>'>
+            <select name='location' id='locationSelect' onchange='runAJAX()'>
+              <?php doLocations(); ?>
+            </select>
           </form>
         </div>
         <br>
@@ -36,9 +39,11 @@
         function runAJAX()  {
           var year = document.getElementById("year").value
           var month = document.getElementById("monthSelect").value
+          var location = document.getElementById("locationSelect").value
           var url = "init.php?"
           url += "year=" + year
           url += "&month=" + month
+          url += "&location=" + location
           url += "&function=doCalendar"
           loadDoc(url, 'calendar')
         }
