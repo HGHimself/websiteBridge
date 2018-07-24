@@ -34,6 +34,14 @@
 							<textarea id='textArea' formid='signupform' name='description' placeholder="Write your description here..."></textarea>
 							<br>
 							<br>
+              <label>Location:</label>
+							<select name='location' id='location' >
+								<option value='Honors'>Honors</option>
+								<option value='Aces'>Aces</option>
+								<option value='Cavendish'>Cavendish</option>
+							</select>
+							<br>
+							<br>
 							<label>Reoccurring:</label>
 			        <input type="checkbox" id="check" name="reoccurring" value="1">
               <br>

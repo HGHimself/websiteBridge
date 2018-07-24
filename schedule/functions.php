@@ -102,6 +102,39 @@ function getTimes($day)  {
   else echo "0 results";
 }
 
+function showEvent($pathToRoot)  {
+  $id = $_GET['post'];
+
+  $tableName = 'Events';
+  $headers = NULL;
+  $conditions = sprintf('ID=%s', $id);
+
+  $result = queryDB($tableName, $headers, $conditions);
+
+  //print_r($results);
+  if ($result->num_rows > 0) {
+		// output data of each row
+
+		while($row = $result->fetch_assoc()) {
+			printf('<h1>%s</h1>', $row['Name']);
+      if($row['Reoccurring'] == '1')  {
+        printf('<h3>On %s ', $row['Day']);
+      }
+      else  {
+        $textDay = getTextDate($row['Date']);
+        printf('<h3>On %s ', $textDay);
+      }
+      printf('at %s</h3>', convertTime($row['Time']));
+
+      printf('<p>%s</p>', $row['Description']);
+
+      printf("<a href='%saddReservation.php?id=%s'>Click Here</a> To Make A Reservation", $pathToRoot, $row['ID']);
+
+		}
+  }
+
+
+}
 
 
 

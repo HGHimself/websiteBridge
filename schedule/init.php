@@ -35,6 +35,7 @@ if(isset($_POST['submit']))  {
 						'Description' => $_POST['description'],
 						'CreatedOn'		=> getToday(),
 						'Type'				=> $_POST['type'],
+						'Location'				=> $_POST['location'],
 						);
 
 	if(isset($_POST['reoccurring']))  {

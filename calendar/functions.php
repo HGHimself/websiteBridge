@@ -17,7 +17,7 @@ function doCalendar($month, $year)  {
 	$months = $GLOBALS['months'];
 	$weekdays = $GLOBALS['weekdays'];
 	$monthDays = $GLOBALS['monthDays'];
-  
+
   if(findLeapYear($year))  {
     echo 'yeet';
     $monthDays['February'] = 29;
