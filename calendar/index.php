@@ -29,6 +29,7 @@
             <select name='location' id='locationSelect' onchange='runAJAX()'>
               <?php doLocations(); ?>
             </select>
+            <input name='ajax' id='ajax' type='hidden' value=''>
           </form>
         </div>
         <br>

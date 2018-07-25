@@ -50,7 +50,31 @@ if(isset($_POST['submit']))  {
 	}
 	insertIntoTable($table, $values);
 }
-else if(isset($_POST['remove']))  removeById("Events", $_POST['id']);
+else if(isset($_POST['update']))  {
+
+	$table = "Events";
+	$values = array(
+						'Name' 			  => $_POST['name'],
+						'Description' => $_POST['description'],
+						'CreatedOn'		=> getToday(),
+						'Type'				=> $_POST['type'],
+						'Location'				=> $_POST['location'],
+						);
+
+	if(isset($_POST['reoccurring']))  {
+		$values['Time'] = $_POST['rTime'];
+		$values['Reoccurring'] = '1';
+		$values['Day'] = $_POST['day'];
+	}
+	else  {
+		$values['Time'] = $_POST['time'];
+		$values['Reoccurring'] = '0';
+		$values['Date'] = $_POST['date'];
+	}
+	$condition = sprintf("ID='%s'", $_POST['id']);
+	updateRowsInTable($table, $values, $condition);
+}
+if(isset($_POST['remove']))  removeById("Events", $_POST['id']);
 
 
 

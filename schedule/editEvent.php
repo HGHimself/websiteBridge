@@ -4,8 +4,15 @@
   <head>
 		<?php include $pathToRoot . $incLocation . "meta.php"; ?>
     <title>Create Event</title>
-    <script>
-    </script>
+    <?php
+      if(isset($_GET['id'])) {
+        $row = getEvent($_GET['id']);
+        $flag = 0;
+      }
+      else $flag = 1;
+
+      print_r($row);
+    ?>
 	</head>
   <body>
 		<?php include $pathToRoot . $incLocation . "header.php"; ?>
@@ -14,37 +21,42 @@
 			<div class='row'>
 				<div class='leftcolumn'>
 					<div class='card'>
-						<h2>Create an Event</h2>
+						<h2>Edit an Event</h2>
 						<h3><a href="index.php">View Schedule</a></h3>
 					</div>
 					<div class='card'>
+            <?php if($flag == 0): ?>
 						<form id='signupform' class='centerText' action='' method='post'>
 							<label>Type:</label>
 							<select name='type' id='type' >
-                <?php
-                  $types = $GLOBALS['types'];
-                  foreach($types as $type)  {
-                    printf("<option %s value='%s'>%s</option>", $type, $type);
-                  }
-                ?>
+              <?php
+                $types = $GLOBALS['types'];
+                foreach($types as $type)  {
+                  if($type == $row['Type']) $selected = 'selected';
+                  else $selected = '';
+                  printf("<option %s value='%s'>%s</option>", $selected, $type, $type);
+                }
+              ?>
 							</select>
 							<br>
 							<br>
 							<label>Name of Event:</label>
-							<input name='name' type='text' required>
+							<input name='name' type='text' value='<?php echo $row['Name']; ?>' required>
 							<br>
 							<br>
-							<textarea id='textArea' formid='signupform' name='description' placeholder="Write your description here..."></textarea>
+							<textarea id='textArea' formid='signupform' name='description' placeholder="Write your description here..."><?php echo $row['Description']; ?></textarea>
 							<br>
 							<br>
               <label>Location:</label>
 							<select name='location' id='location' >
-                <?php
-                  $locations = $GLOBALS['locations'];
-                  foreach($locations as $location)  {
-                    printf("<option %s value='%s'>%s</option>", $location, $location);
-                  }
-                ?>
+              <?php
+                $locations = $GLOBALS['locations'];
+                foreach($locations as $location)  {
+                  if($location == $row['Location']) $selected = 'selected';
+                  else $selected = '';
+                  printf("<option %s value='%s'>%s</option>", $selected, $location, $location);
+                }
+              ?>
 							</select>
 							<br>
 							<br>
@@ -58,7 +70,9 @@
                   <?php
                     $weekdays = $GLOBALS['weekdays'];
                     foreach($weekdays as $weekday)  {
-                      printf("<option %s value='%s'>%s</option>", $weekday, $weekday);
+                      if($weekday == $row['Day']) $selected = 'selected';
+                      else $selected = '';
+                      printf("<option %s value='%s'>%s</option>", $selected, $weekday, $weekday);
                     }
                   ?>
 								</select>
@@ -76,11 +90,29 @@
 										loadDoc(url, 'times')
 									}
 									$( document ).ready(function() {
-                    document.getElementById("check").checked = true;
-                    document.getElementById("checked").style.display = "block"
-                    document.getElementById("notchecked").style.display = "none"
+
 										runAJAX()
+
+                    <?php if($row['Reoccurring'] == 1): ?>
+                      document.getElementById("check").checked = true;
+                      document.getElementById("checked").style.display = "block"
+                      document.getElementById("notchecked").style.display = "none"
+                    <?php else: ?>
+                      document.getElementById("check").checked = false;
+                      document.getElementById("notchecked").style.display = "block"
+                      document.getElementById("checked").style.display = "none"
+                    <?php endif; ?>
+
+                    var len = document.getElementById("times").options.length
+                    var i
+                    for(i = 0; i<len; i++)  {
+                      console.log(i)
+                      if(document.getElementById("times").options[i].text == '<?php echo convertTime($row['Time']); ?>')  {
+                        document.getElementById("times").options[i].selected = true
+                      }
+                    }
 	                });
+
 	                document.getElementById("check").addEventListener('change', (event) => {
 		                if (event.target.checked) {
 		                  document.getElementById("checked").style.display = "block"
@@ -94,6 +126,9 @@
 	                document.getElementById("day").addEventListener('change', (event) => {
 										runAJAX()
 	                })
+                  $("input[type=hidden]").bind("change", function() {
+                    console.log($(this).val());
+                  });
 	              </script>
 								<br>
 								<br>
@@ -109,8 +144,13 @@
 	              <br>
               </div>
               <input name='ajax' id='ajax' type='hidden' value=''>
-							<input name='submit' type='submit'>
+              <input name='id' type='hidden' value='<?php echo $row['ID']; ?>'>
+							<input name='update' type='submit'>
 						</form>
+          <?php
+            else: printf("Select an Event to edit <a href='%calendar'>here</a>", $pathToRoot);
+            endif;
+          ?>
 					</div>
 					<div class='card'>
 						<h3>Upcoming Special Events</h3>

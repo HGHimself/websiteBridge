@@ -129,11 +129,26 @@ function showEvent($pathToRoot)  {
       printf('<p>%s</p>', $row['Description']);
 
       printf("<a href='%saddReservation.php?id=%s'>Click Here</a> To Make A Reservation", $pathToRoot, $row['ID']);
+      printf("<br><a href='%sschedule/editEvent.php?id=%s'>Click Here</a> To Edit This Event", $pathToRoot, $row['ID']);
 
 		}
   }
+}
 
+function getEvent($id)  {
+  $table = 'Events';
+  $headers = NULL;
+  $condition = sprintf("ID=%s", $id);
 
+  $result = queryDB($table, $headers, $condition);
+
+  if ($result->num_rows > 0) {
+		// output data of each row
+
+		while($row = $result->fetch_assoc()) {
+			return $row;
+		}
+  }
 }
 
 

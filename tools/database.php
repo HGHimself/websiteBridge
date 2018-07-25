@@ -174,6 +174,57 @@ function insertIntoTable($table, $values)  {
 	}
 }
 
+function updateRowsInTable($table, $values, $condition)  {
+  $mysqli = setUpConnection();
+	if(!$mysqli)  {
+		echo 'The connection didnt work!';
+	}
+	else  {
+		//begin SET ...
+    $data = " SET ";
+
+		//create parameters array
+		//$types holds specifiers for bind_params i.e. 'sss' for 3 strings
+    $params = array('');
+    $types = "";
+
+    $i = 0;
+		$sql = sprintf("UPDATE %s ", $table);
+    foreach ($values as $header => $value)  {
+      if($i == 0) $data .= $header .' = ?';
+      else $data .= sprintf(", %s = ?", $header);
+
+			//$data = 'SET column1 = value1, column2 = value2, ...'
+			//$params = array( '' , 'data1', 'data2', ...)
+			//$types = 'ss...'
+      array_push($params, $value);
+      $types .= "s";
+      $i++;
+    }
+
+		//slip $types into $params
+		//$params = array( 'ss...' , 'data1', 'data2', ...)
+    $params[0] = $types;
+    $sql .= $data;
+		if($condition != NULL) $sql .= " WHERE " . $condition;
+		echo $sql;
+    print_r($params);
+		//$sql = "INSERT INTO $tableName(col1, col2, ...) VALUES(?, ?, ...)"
+		$stmt = $mysqli->prepare($sql);
+		//runs $stmt->bind_param() over $params array to allow for dynamic number of cols
+    call_user_func_array(array($stmt, 'bind_param'), refValues($params));
+
+		if ($stmt->execute() === TRUE) {
+  		//echo "<script>alert(New record created successfully)</script>";
+		} else {
+		  echo "Error: " . $sql . "<br>" . $mysqli->error;
+		}
+
+		$stmt->close();
+		$mysqli->close();
+	}
+}
+
 
 
 ?>

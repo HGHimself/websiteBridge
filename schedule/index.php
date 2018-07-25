@@ -27,6 +27,7 @@
 			<br>
 			<div class='row calendar' id='schedule'>
       </div>
+      <input name='ajax' id='ajax' type='hidden' value=''>
       <script>
         function runAJAX(method, param)  {
           var url = "init.php?"

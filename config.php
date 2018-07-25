@@ -13,6 +13,13 @@ $locations = array(
           'Cavendish',
           );
 
+global $types;
+$types = array(
+          'Game',
+          'Lesson',
+          'Other',
+          );
+
 global $symbols;
 $symbols['spade'] = "<b class='blackSuit'>♠</b>";
 $symbols['heart'] = "<b class='redSuit'>♥</b>";

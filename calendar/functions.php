@@ -188,7 +188,7 @@ function showEvents($date, $day, $location, $time)  {
 			else if($row['Type'] == 'Lesson') $symbol = $GLOBALS['symbols']['heart'];
 			else if($row['Type'] == 'Other') $symbol = $GLOBALS['symbols']['diamond'];
 			else $symbol = $GLOBALS['symbols']['club'];
-			echo $symbol . "<a href='event.php?post=" . $row['ID'] . "'>" . $row['Name'] . '</a><br><br>';
+			echo $symbol . "<a href='../schedule/event.php?post=" . $row['ID'] . "'>" . $row['Name'] . '</a><br><br>';
 		}
 	}
 }

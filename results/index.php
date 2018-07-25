@@ -22,6 +22,7 @@
               <select name='location' id='loc' >
                 <?php fillSelect($locations); ?>
               </select>
+              <input name='ajax' id='ajax' type='hidden' value=''>
             </form>
 					</div>
           <div class='card' id='results'>
