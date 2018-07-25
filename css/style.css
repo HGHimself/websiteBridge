@@ -32,6 +32,7 @@
 *** NAVBAR
 *
 */
+
 .topnav {
   overflow: hidden;
   background-color: var(--black);
@@ -51,16 +52,13 @@
   text-decoration: none;
 }
 
-/* Change color on hover */
-.topnav a:hover {
-  background-color: var(--lightBlack);
-}
-
+/* active links are red, from nav.php the current directory is active */
 .topnav a.active {
     background-color: var(--red);
     color: var(--white);
 }
 
+/* on hover, lighten up background to grey */
 .topnav a:hover:not(.active) {
     background-color: var(--lightBlack);
     color: var(--white);
@@ -82,11 +80,13 @@
   border-radius: 0.3em;
 }
 
+/* make header h1 huge */
 .header h1 {
   font-size: 50px;
 }
 
-h1 ,h2 ,h3, h4, h5, h6  {r
+/* all header tags are black */
+h1 ,h2, h4, h5, h6  {
   color: var(--black);
 }
 
@@ -96,11 +96,13 @@ h1 ,h2 ,h3, h4, h5, h6  {r
 *** BODY
 *
 */
+
 * {
   font-family: "Averia Serif Libre";
   box-sizing: border-box;
 }
 
+/* give the body a small padding and make the wood background image static */
 body {
   padding: 10px;
   background: var(--wood);
@@ -110,6 +112,7 @@ body {
   background-size: cover;
 }
 
+/* make the background look like a typical felt card table */
 main {
   background: var(--greenFelt);
   border: 2px solid var(--goldTrim);
@@ -142,7 +145,7 @@ main {
   width: 50%;
 }
 
-/* Create two equal columns that floats next to each other */
+/* for full week display, make a day 1/7 of the full width */
 .day {
   float: left;
   width: 14.28%;
@@ -151,26 +154,30 @@ main {
 
 }
 
+/* Set full-width to expand the whole page */
 .dayContainer {
-    width: 100%; /* Set full-width to expand the whole page */
+    width: 100%;
 }
 
+/* not a day in the current month (for calendar) */
 .notMonth {
   background-color: var(--lightGrey);
 }
 
+/* if the calendar day is today, make it stand out */
 .isToday {
   background-color: var(--lightGreen);
 }
 
+/* make the div be centered in the container */
 .center {
   margin: auto;
 }
 
+/* center anything inside the div */
 .centerText {
   text-align: center;
 }
-
 
 /* Fake image */
 .fakeimg {
@@ -194,11 +201,13 @@ main {
   clear: both;
 }
 
+/* when the calendar has empty spots, fill with grey */
 .calendar  {
   background-color: var(--darkGrey);
   border: 2px solid var(--black);
 }
 
+/* make day header will stand out from white background */
 .dayHeader  {
   background-color: var(--black);
   color: var(--white);

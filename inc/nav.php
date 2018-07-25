@@ -19,7 +19,7 @@
       if(in_array($name, $rightOfNav)) $right = 'style="float:right"';
       else $right = '';
 
-      printf("<a %s %s href='%s'>%s</a>", $right, $active, $pathToRoot . $file, $name);
+      printf("<a %s %s class='navLink' href='%s'>%s</a>", $right, $active, $pathToRoot . $file, $name);
     }
 
 

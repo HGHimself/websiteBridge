@@ -109,7 +109,7 @@ function doCalendar($month, $year, $location)  {
           printf("<div class='day %s' id='%s'>", $class, $id);
             //increment count each time you place down a day
             printf("<a href='day.php?day=%s'><b>%s</b></a><br>", $id, $count++);
-            showEvents($id, $day, $location);
+            showEvents($id, $day, $location, NULL);
             //if youre past the number of days, start current month
           echo "</div>"; //close day div
         }
@@ -145,7 +145,7 @@ function doCalendar($month, $year, $location)  {
 
           printf("<div class='day %s' id='%s'>", $class, $id);
    	        printf("<a href='day.php?day=%s'><b>%s</b></a><br>", $id, $count++);
-            showEvents($id, $day, $location);
+            showEvents($id, $day, $location, NULL);
   		    echo "</div>"; //close day div
         }
 		  echo "</div>"; //close row div
@@ -167,18 +167,22 @@ function displayDays($weekdays)  {
   //echo "</div>";
 }
 
-function showEvents($date, $day, $location)  {
+function showEvents($date, $day, $location, $time)  {
 
   //query the db for all reoccurring events at a certain time and day
 	$table = "Events";
   $headers = NULL;
-  $conditions = sprintf("Location='%s' AND Day='%s' OR Date='%s'", $location, $day, $date);
+
+  $query = "";
+  if($location != NULL) $query .= "Location='" . $location . "' AND ";
+  if($time != NULL) $query .= "Time='" . $time . "' AND ";
+  $query .= "Day='%s' OR Date='%s'";
+
+  $conditions = sprintf($query, $day, $date);
 
   $result = queryDB($table, $headers, $conditions);
 
 	if ($result->num_rows > 0) {
-		// output data of each row
-		//echo '<ul>';
 		while($row = $result->fetch_assoc()) {
 			if($row['Type'] == 'Game') $symbol = $GLOBALS['symbols']['spade'];
 			else if($row['Type'] == 'Lesson') $symbol = $GLOBALS['symbols']['heart'];
@@ -186,7 +190,6 @@ function showEvents($date, $day, $location)  {
 			else $symbol = $GLOBALS['symbols']['club'];
 			echo $symbol . "<a href='event.php?post=" . $row['ID'] . "'>" . $row['Name'] . '</a><br><br>';
 		}
-		//echo '</ul>';
 	}
 }
 
@@ -214,35 +217,11 @@ function doSingleDay($date)  {
 		foreach($times as $time)  {
 			$printTime = convertTime($time);
       echo '<h4>' . $printTime . '</h4>';
-			showEvent($date, $day, $time);
+			showEvents($date, $day, NULL, $time);
 		}
 	}
   else echo "0 results";
 }
-
-function showEvent($date, $day, $time)  {
-
-
-  //query the db for all reoccurring events at a certain time and day
-	$table = "Events";
-  $headers = NULL;
-  $conditions = sprintf("Day='%s' AND Time='%s' AND Reoccurring='1'", $day, $time);
-  $result = queryDB($table, $headers, $conditions);
-
-	if ($result->num_rows > 0) {
-		// output data of each row
-		//echo '<ul>';
-		while($row = $result->fetch_assoc()) {
-			if($row['Type'] == 'Game') $symbol = $GLOBALS['symbols']['spade'];
-			else if($row['Type'] == 'Lesson') $symbol = $GLOBALS['symbols']['heart'];
-			else if($row['Type'] == 'Other') $symbol = $GLOBALS['symbols']['diamond'];
-			else $symbol = $GLOBALS['symbols']['club'];
-			echo $symbol . "<a href='event.php?post=" . $row['ID'] . "'>" . $row['Name'] . '</a><br>';
-		}
-		//echo '</ul>';
-	}
-}
-
 
 
 ?>
