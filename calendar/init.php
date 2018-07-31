@@ -18,8 +18,6 @@ else $year = getdate()['year'];
 if(isset($_GET['month'])) $month = $_GET['month'];
 else $month = getdate()['month'];
 
-if(findLeapYear($year)) $GLOBALS['monthDays']['February'] = '29';
-
 
 if(isset($_GET['function']))  {
   if($_GET['function'] == 'doCalendar')  {

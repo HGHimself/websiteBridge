@@ -4,7 +4,7 @@
 function doMonths()  {
   $months = $GLOBALS['months'];
   if(isset($_GET['month']))  $month = $_GET['month'];
-  else $month = "";
+  else $month = getThisMonth();
 
   foreach($months as $m)  {
     //if the mon is the one from GET, make it selected
@@ -36,8 +36,8 @@ function doCalendar($month, $year, $location)  {
 	$weekdays = $GLOBALS['weekdays'];
 	$monthDays = $GLOBALS['monthDays'];
 
-  if(findLeapYear($year))  {
-    echo 'yeet';
+  if(findLeapYear($year) === TRUE)  {
+    echo "yeet";
     $monthDays['February'] = 29;
   }
 
@@ -145,7 +145,7 @@ function doCalendar($month, $year, $location)  {
 
           printf("<div class='day %s' id='%s'>", $class, $id);
    	        printf("<a href='day.php?day=%s'><b>%s</b></a><br>", $id, $count++);
-            showEvents($id, $day, $location, NULL);
+            showEvents($id, $day, $location, NULL, 'full');
   		    echo "</div>"; //close day div
         }
 		  echo "</div>"; //close row div
@@ -167,7 +167,7 @@ function displayDays($weekdays)  {
   //echo "</div>";
 }
 
-function showEvents($date, $day, $location, $time)  {
+function showEvents($date, $day, $location, $time, $flag)  {
 
   //query the db for all reoccurring events at a certain time and day
 	$table = "Events";
@@ -217,7 +217,7 @@ function doSingleDay($date)  {
 		foreach($times as $time)  {
 			$printTime = convertTime($time);
       echo '<h4>' . $printTime . '</h4>';
-			showEvents($date, $day, NULL, $time);
+			showEvents($date, $day, NULL, $time, 'single');
 		}
 	}
   else echo "0 results";

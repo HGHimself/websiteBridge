@@ -78,6 +78,10 @@ function getToday()  {
 	//return makeDate('2018', '08', '02');
 }
 
+function getThisMonth()  {
+	return getdate()['month'];
+}
+
 function makeDate($year, $month, $day)  {
 	return sprintf("%s-%s-%s", $year, $month, $day);
 }

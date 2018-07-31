@@ -21,11 +21,11 @@
           <form action='' method='get'>
             <label>Year:</label>
             <input type='number' id='year' name='year' value='<? echo $year; ?>'>
-            <input type='submit' value='<'>
+
             <select name='month' id='monthSelect' onchange='runAJAX()'>
               <?php doMonths(); ?>
             </select>
-            <input type='submit' value='>'>
+            
             <select name='location' id='locationSelect' onchange='runAJAX()'>
               <?php doLocations(); ?>
             </select>

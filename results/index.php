@@ -37,7 +37,7 @@
             }
             $( document ).ready(function() {
               //runAJAX()
-              document.getElementById("results").innerHTML = "Please select a location to view Game Results from"
+              document.getElementById("results").innerHTML = "Please select a location to view Game Results from."
             });
             document.getElementById("loc").addEventListener('change', (event) => {
               runAJAX()

@@ -4,8 +4,13 @@ function loadDoc(file, id) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      document.getElementById('ajax').value = 'changed'
+
+
       document.getElementById(id).innerHTML = this.responseText
+
+      var event = new Event('ajaxEvent');
+      // Dispatch the event.
+      document.getElementById('ajax').dispatchEvent(event);
     }
   }
   xhttp.open("GET", file, true)

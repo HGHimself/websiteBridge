@@ -24,7 +24,7 @@
                 <?php
                   $types = $GLOBALS['types'];
                   foreach($types as $type)  {
-                    printf("<option %s value='%s'>%s</option>", $type, $type);
+                    printf("<option value='%s'>%s</option>", $type, $type);
                   }
                 ?>
 							</select>
@@ -42,7 +42,7 @@
                 <?php
                   $locations = $GLOBALS['locations'];
                   foreach($locations as $location)  {
-                    printf("<option %s value='%s'>%s</option>", $location, $location);
+                    printf("<option value='%s'>%s</option>", $location, $location);
                   }
                 ?>
 							</select>
@@ -58,7 +58,7 @@
                   <?php
                     $weekdays = $GLOBALS['weekdays'];
                     foreach($weekdays as $weekday)  {
-                      printf("<option %s value='%s'>%s</option>", $weekday, $weekday);
+                      printf("<option value='%s'>%s</option>", $weekday, $weekday);
                     }
                   ?>
 								</select>

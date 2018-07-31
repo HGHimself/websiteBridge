@@ -3,7 +3,7 @@
 <html>
   <head>
 		<?php include $pathToRoot . $incLocation . "meta.php"; ?>
-    <title>Create Event</title>
+    <title>Edit Event</title>
     <?php
       if(isset($_GET['id'])) {
         $row = getEvent($_GET['id']);
@@ -11,7 +11,7 @@
       }
       else $flag = 1;
 
-      print_r($row);
+      //print_r($row);
     ?>
 	</head>
   <body>
@@ -81,6 +81,7 @@
 								<label>Time:</label>
 								<select name='rTime' id='times' >
 								</select>
+                <input name='ajax' id='ajax' type='hidden' value=''>
 								<script>
 									function runAJAX()  {
 										var day = document.getElementById("day").value
@@ -90,7 +91,6 @@
 										loadDoc(url, 'times')
 									}
 									$( document ).ready(function() {
-
 										runAJAX()
 
                     <?php if($row['Reoccurring'] == 1): ?>
@@ -103,14 +103,7 @@
                       document.getElementById("checked").style.display = "none"
                     <?php endif; ?>
 
-                    var len = document.getElementById("times").options.length
-                    var i
-                    for(i = 0; i<len; i++)  {
-                      console.log(i)
-                      if(document.getElementById("times").options[i].text == '<?php echo convertTime($row['Time']); ?>')  {
-                        document.getElementById("times").options[i].selected = true
-                      }
-                    }
+
 	                });
 
 	                document.getElementById("check").addEventListener('change', (event) => {
@@ -126,9 +119,17 @@
 	                document.getElementById("day").addEventListener('change', (event) => {
 										runAJAX()
 	                })
-                  $("input[type=hidden]").bind("change", function() {
-                    console.log($(this).val());
-                  });
+                  // Listen for the event.
+                  document.getElementById('ajax').addEventListener('ajaxEvent', function (e) {
+                    var len = document.getElementById("times").options.length
+                    var i
+                    for(i = 0; i<len; i++)  {
+                      console.log(i)
+                      if(document.getElementById("times").options[i].text == '<?php echo convertTime($row['Time']); ?>')  {
+                        document.getElementById("times").options[i].selected = true
+                      }
+                    }
+                  }, false);
 	              </script>
 								<br>
 								<br>
@@ -143,7 +144,7 @@
 	              <br>
 	              <br>
               </div>
-              <input name='ajax' id='ajax' type='hidden' value=''>
+
               <input name='id' type='hidden' value='<?php echo $row['ID']; ?>'>
 							<input name='update' type='submit'>
 						</form>
