@@ -193,7 +193,7 @@ function showEvents($date, $day, $location, $time, $flag)  {
 	}
 }
 
-function doSingleDay($date)  {
+function doSingleDay($date, $location)  {
 
   $dateObj = getdate(strtotime($date));
   $day = $dateObj['weekday'];
@@ -217,7 +217,7 @@ function doSingleDay($date)  {
 		foreach($times as $time)  {
 			$printTime = convertTime($time);
       echo '<h4>' . $printTime . '</h4>';
-			showEvents($date, $day, NULL, $time, 'single');
+			showEvents($date, $day, $location, $time, 'single');
 		}
 	}
   else echo "0 results";

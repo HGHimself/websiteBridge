@@ -1,7 +1,7 @@
 <div class="topnav">
   <nav>
     <?php
-    if(isset($_SESSION['loggedIn']) && $_SESSION["loggedIn"] == TRUE)  $login = "Logout-" . $_SESSION['name'];
+    if(isset($_SESSION['loggedIn']) && $_SESSION["loggedIn"] == TRUE)  $login = "Logout of " . $_SESSION['name'];
     else $login = "Login";
 
     $links = array(
@@ -16,13 +16,11 @@
 
     $dropdowns = array(
       "Home" => array(
-        "" => "Home",
         "about.php" => "About",
         "#contact" => "Contact",
       ),
       $login => array(
-        "auth/" => $login,
-        "auth/create.php" => "View Profile",
+        "auth/update.php" => "View Profile",
         "auth/create.php" => "Create User",
       ),
     );
@@ -33,18 +31,18 @@
       if($dirname == $file) $active = "active";
       else $active = '';
 
-      if(in_array($name, $rightOfNav)) $right = 'style="float:right"';
-      else $right = '';
+      if(in_array($name, $rightOfNav)) $float = 'right';
+      else $float = 'left';
       if(isset($dropdowns[$name]))  {
 
-        printf("<div class='dropdown'><a %s class='%s navLink dropbtn' href='%s'>%s</a>", $right, $active, $pathToRoot . $file, $name);
+        printf("<div class='%s dropdown'><a class='%s navLink dropbtn' href='%s'>%s</a>", $float, $active, $pathToRoot . $file, $name);
         printf("<div class='dropdown-content'>");
         foreach($dropdowns[$name] as $dFile => $dName)  {
-          printf("<a href='%s'>%s</a>", $dFile, $dName);
+          printf("<a href='%s'>%s</a>", $pathToRoot . $dFile, $dName);
         }
         echo "</div></div>";
       }
-      else printf("<a %s %s class='navLink' href='%s'>%s</a>", $right, $active, $pathToRoot . $file, $name);
+      else printf("<a class='%s %s navLink' href='%s'>%s</a>", $active, $float, $pathToRoot . $file, $name);
     }
     ?>
 

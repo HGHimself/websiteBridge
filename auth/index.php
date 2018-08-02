@@ -1,4 +1,15 @@
-<?php include "init.php"; ?>
+<?php include "init.php";
+
+if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == TRUE)  {
+  $message = "You have logged out.";
+}
+//You have entered the logout page, so logout
+$_SESSION['loggedIn'] = FALSE;
+$_SESSION['name'] = NULL;
+$_SESSION['role'] = NULL;
+
+
+?>
 <!DOCTYPE html>
 <html>
   <head>

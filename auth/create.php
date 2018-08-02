@@ -46,6 +46,7 @@
                   }
                 ?>
 							</select>
+              <input type='hidden' name='user' value='user'>
               <br>
               <br>
               <p><?php echo $message; ?></p>

@@ -44,7 +44,6 @@
 
 /* Style the topnav links */
 .topnav a {
-  float: left;
   display: block;
   color: var(--white);
   text-align: center;
@@ -65,8 +64,15 @@
 }
 
 .dropdown {
-    float: left;
     overflow: hidden;
+}
+
+.right {
+  float: right;
+}
+
+.left  {
+  float: left;
 }
 
 .dropdown .dropbtn {
@@ -80,13 +86,14 @@
 }
 
 .topnav a:hover, .dropdown:hover .dropbtn {
-    background-color: var(--red);
+    color: var(--white);
+    background-color: var(--lightBlack);
 }
 
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: var(--red);
+    background-color: var(--white);
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }

@@ -1,5 +1,5 @@
 <?php include "config.php";
-echo $dirname = '';
+$dirname = '';
 $pathToRoot = '';
 ?>
 <!DOCTYPE html>
@@ -12,6 +12,11 @@ $pathToRoot = '';
 		<?php include $incLocation . "header.php"; ?>
 		<?php include $incLocation . "nav.php"; ?>
 		<main>
+      <?
+      if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == TRUE)  {
+        printf("<h2 class='dayHeader'>Welcome %s!</h2>", $_SESSION['name']);
+      }
+      ?>
 			<div class="row">
 			  <div class="leftcolumn">
 			    <div class="card">

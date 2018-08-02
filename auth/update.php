@@ -1,9 +1,22 @@
-<?php include "init.php"; ?>
+<?php include "init.php";
+$flag = 0;
+if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == TRUE)  {
+  if(isset($_GET['user'])) $id = $_GET['user'];
+  else $id = $_SESSION['id'];
+  $flag = 0;
+  $user = populateUserData($id);
+}
+else  {
+  $flag = 1;
+  $message = "You need to log in to edit a profile.";
+}
+
+?>
 <!DOCTYPE html>
 <html>
   <head>
 		<?php include $pathToRoot . $incLocation . "meta.php"; ?>
-    <title>Home</title>
+    <title>View User Profile</title>
 	</head>
   <body>
 		<?php include $pathToRoot . $incLocation . "header.php"; ?>
@@ -12,13 +25,14 @@
 			<div class='row'>
 				<div class='leftcolumn'>
 					<div class='card'>
-						<h2>Create New User</h2>
-						<h3><a href="index.php">Login</a></h3>
+						<h2>Update User</h2>
+						<h3><a href="index.php"><? echo $login; ?></a></h3>
 					</div>
 					<div class='card'>
+            <?php if($flag == 0):  ?>
             <form id='signupform' class='centerText' action='' method='post'>
               <label>Username:</label>
-              <input required type="text" name="username" value='<?php echo $user_username; ?>'>
+              <input required type="text" name="username" value='<?php echo $user['username']; ?>'>
               <br>
               <br>
               <label>Password:</label>
@@ -30,11 +44,11 @@
               <br>
               <br>
               <label>Name:</label>
-              <input required type="text" name="name" value='<?php echo $user_name; ?>'>
+              <input required type="text" name="name" value='<?php echo $user['name']; ?>'>
               <br>
               <br>
               <label>Email:</label>
-              <input type="text" name="email" value='<?php echo $user_email; ?>'>
+              <input type="text" name="email" value='<?php echo $user['email']; ?>'>
               <br>
               <br>
               <label>Role:</label>
@@ -43,16 +57,22 @@
                   $selected = '';
                   $roles = $GLOBALS['roles'];
                   foreach($roles as $role)  {
-                    if($role == $user_role) $selected = 'selected';
+                    if($role == $user['role']) $selected = 'selected';
                     else $selected = '';
                     printf("<option %s val='%s'>%s</option>", $selected, $role, $role);
                   }
                 ?>
 							</select>
+              <input type='hidden' name='user' value='user'>
+              <input type='hidden' name='id' value='<? echo $user['id']; ?>'>
               <br>
               <br>
               <p><?php echo $message; ?></p>
-              <input type="submit" value="Create User" name='create'>
+              <input type="submit" value="Update User" name='update'>
+            <?
+            else: echo $message;
+            endif;
+            ?>
             </form>
 					</div>
 				</div>

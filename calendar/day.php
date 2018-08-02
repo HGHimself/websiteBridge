@@ -1,4 +1,7 @@
-<?php include "init.php"; ?>
+<?php include "init.php";
+if(isset($_GET['day'])) $day = $_GET['day'];
+else $day = "NULL";
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -16,12 +19,37 @@
               <h2>Single Day View</h2>
               <h3><a href="<?php echo $pathToRoot; ?>calendar">View Full Calendar</a></h3>
             </div>
-            <div class='card center'>
-              <?php
-              if(isset($_GET['day'])) doSingleDay($_GET['day']);
-              else printf("Examine calendar <a href='%scalendar'>here</a> to find a specific day to view.", $pathToRoot);
-              ?>
+            <div class='card'>
+              <form action='' method='get'>
+                <label>Location:</label>
+                <select name='location' id='location' onchange='runAJAX()'>
+                  <?php doLocations(); ?>
+                </select>
+                <input name='ajax' id='day' type='hidden' value='<?php echo $day; ?>'>
+                <input name='ajax' id='ajax' type='hidden' value=''>
+              </form>
             </div>
+            <div id='singleDay' class='card center'>
+            </div>
+            <script>
+              function runAJAX()  {
+                var location = document.getElementById("location").value
+                var date = document.getElementById("day").value
+                var url = "init.php?"
+                if(date != 'NULL')  {
+                  url += "&date=" + date
+                }
+                url += "&location=" + location
+                url += "&function=doSingleDay"
+                loadDoc(url, 'singleDay')
+              }
+              $( document ).ready(function() {
+                runAJAX()
+              })
+              document.getElementById("location").addEventListener('change', (event) => {
+                runAJAX()
+              })
+            </script>
     			</div>
 			  </div>
 			 	<?php include $pathToRoot . $incLocation . "sidebar.php"; ?>

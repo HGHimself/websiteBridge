@@ -24,6 +24,11 @@ if(isset($_GET['function']))  {
     //echo $_GET['month'];
     doCalendar($_GET['month'], $_GET['year'], $_GET['location']);
   }
+
+  if($_GET['function'] == 'doSingleDay')  {
+    if(isset($_GET['date'])) doSingleDay($_GET['date'], $_GET['location']);
+    else printf("Examine calendar <a href='%scalendar'>here</a> to find a specific day to view.", $pathToRoot);
+  }
 }
 
 ?>
