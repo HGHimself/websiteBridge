@@ -1,5 +1,5 @@
 <?php include "config.php";
-$dirname = '';
+echo $dirname = '';
 $pathToRoot = '';
 ?>
 <!DOCTYPE html>

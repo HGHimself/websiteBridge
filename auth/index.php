@@ -13,7 +13,7 @@
 				<div class='leftcolumn'>
 					<div class='card'>
 						<h2>Login Page</h2>
-						<h3><a href="#">Link</a></h3>
+						<h3><a href="create.php">Create New Profile</a></h3>
 					</div>
 					<div class='card'>
             <form id='signupform' class='centerText' action='' method='post'>
@@ -25,6 +25,7 @@
               <input type="password" name="password">
               <br>
               <br>
+              <p><?php echo $message; ?></p>
               <input type="submit" value="Login" name='login'>
             </form>
 					</div>

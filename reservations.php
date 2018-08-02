@@ -1,5 +1,7 @@
-<?php
-include "config.php";
+<?php include "config.php";
+$dirname = '';
+$pathToRoot = '';
+
 
 if(!isset($_GET['date']))  {
   $day = getdate();

@@ -1,5 +1,12 @@
 <?php
 
+session_start();
+
+if(isset($_SESSION["loggedIn"]) && $_SESSION["loggedIn"] == TRUE)  {
+  $_SESSION["loggedIn"] = TRUE;   //redundant
+}
+else $_SESSION["loggedIn"] = FALSE;
+
 $incLocation = "inc/";
 $toolsLocation = "tools/";
 
@@ -18,6 +25,13 @@ $types = array(
           'Game',
           'Lesson',
           'Other',
+          );
+
+global $roles;
+$roles = array(
+          'Admin',
+          'Teacher',
+          'User',
           );
 
 global $symbols;

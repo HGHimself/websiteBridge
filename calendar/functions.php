@@ -109,7 +109,7 @@ function doCalendar($month, $year, $location)  {
           printf("<div class='day %s' id='%s'>", $class, $id);
             //increment count each time you place down a day
             printf("<a href='day.php?day=%s'><b>%s</b></a><br>", $id, $count++);
-            showEvents($id, $day, $location, NULL);
+            showEvents($id, $day, $location, NULL, 'calendar');
             //if youre past the number of days, start current month
           echo "</div>"; //close day div
         }
@@ -145,7 +145,7 @@ function doCalendar($month, $year, $location)  {
 
           printf("<div class='day %s' id='%s'>", $class, $id);
    	        printf("<a href='day.php?day=%s'><b>%s</b></a><br>", $id, $count++);
-            showEvents($id, $day, $location, NULL, 'full');
+            showEvents($id, $day, $location, NULL, 'calendar');
   		    echo "</div>"; //close day div
         }
 		  echo "</div>"; //close row div

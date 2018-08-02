@@ -210,7 +210,7 @@ function updateRowsInTable($table, $values, $condition)  {
 
 		//echo $sql;
     //print_r($params);
-		
+
 		//$sql = "INSERT INTO $tableName(col1, col2, ...) VALUES(?, ?, ...)"
 		$stmt = $mysqli->prepare($sql);
 		//runs $stmt->bind_param() over $params array to allow for dynamic number of cols
