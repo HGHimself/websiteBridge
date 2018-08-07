@@ -135,6 +135,19 @@
   font-size: 50px;
 }
 
+.header h2 {
+  font-size: 40px;
+}
+
+.header h3 {
+  font-size: 20px;
+}
+
+.headDiv  {
+  background-color: var(--white);
+}
+
+
 /* all header tags are black */
 h1 ,h2, h4, h5, h6  {
   color: var(--black);

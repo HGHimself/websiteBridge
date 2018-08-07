@@ -35,7 +35,6 @@ function showSpecialEvents()  {
 	makeTableFromResult($results, $headers, $tableAttributes, TRUE);
 }
 
-
 //makes a query to the database in the style of
 //'SELECT $headers FROM $table WHERE $conditions'
 //
