@@ -17,11 +17,11 @@ function doMonths()  {
 
 function doLocations()  {
   $locations = $GLOBALS['locations'];
-  if(isset($_GET['locations']))  $location = $_GET['location'];
-  else $location = "";
-
+  if(isset($_GET['location']))  $location = $_GET['location'];
+  else $location = "Honors";
+  echo $location;
   foreach($locations as $l)  {
-    //if the mon is the one from GET, make it selected
+    //if the loc is the one from GET, make it selected
     if($l == $location) $selected = "id='location' selected='selected'";
     else $selected = '';
     //add that b

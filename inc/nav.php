@@ -6,7 +6,7 @@
 
     $links = array(
             "" => "Home",
-            "reservations.php" => "Reservation",
+            "reservations/" => "Reservations",
             "calendar/" => "Calendar",
             "results/" => "Game Results",
             "auth/" => $login,
@@ -22,6 +22,20 @@
       $login => array(
         "auth/update.php" => "View Profile",
         "auth/create.php" => "Create User",
+      ),
+      "Calendar" => array(
+        "calendar/?location=Honors" => "Honors",
+        "calendar/?location=Aces" => "Aces",
+        "calendar/?location=Cavendish" => "Cavendish",
+      ),
+      "Game Results" => array(
+        "results/?location=Honors" => "Honors",
+        "results/?location=Aces" => "Aces",
+        "results/?location=Cavendish" => "Cavendish",
+      ),
+      "Reservations" => array(
+        "#-" => "Current Reservations",
+        "#" => "Make Reservation",
       ),
     );
 

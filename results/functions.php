@@ -1,12 +1,21 @@
 <?php
 
 function fillSelect($locations)  {
-  foreach($locations as $name => $link)  {
-    if($loc == $name) $selected = "selected='selected'";
+  if(isset($_GET['location']))  $location = $_GET['location'];
+  else $location = "Honors";
+  foreach($locations as $l => $link)  {
+    //if the loc is the one from GET, make it selected
+    if($l == $location) $selected = "id='location' selected='selected'";
     else $selected = '';
-
-    printf("<option %s value='%s'>%s</option>", $selected, $name, $name);
+    //add that b
+    printf("<option %s value='%s'>%s</option>", $selected, $link, $l);
   }
+}
+
+
+function doLocations()  {
+  $locations = $GLOBALS['locations'];
+
 }
 
 function showResults($locations, $location)  {

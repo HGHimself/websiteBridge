@@ -124,7 +124,6 @@
 /* Header/Blog Title */
 .header {
   padding: 30px;
-  text-align: center;
   background: var(--greenFelt);
   border: 2px solid var(--goldTrim);
   border-radius: 0.3em;
@@ -208,6 +207,13 @@ main {
   width: 50%;
 }
 
+.threecolumn  {
+  float: left;
+  margin-left: 4.15%;
+  margin-right: 4.15%;
+  width: 24%;
+}
+
 /* for full week display, make a day 1/7 of the full width */
 .day {
   float: left;
@@ -240,6 +246,14 @@ main {
 /* center anything inside the div */
 .centerText {
   text-align: center;
+}
+
+.rightText {
+  text-align: right;
+}
+
+.leftText {
+  text-align: left;
 }
 
 /* Fake image */
