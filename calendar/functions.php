@@ -108,7 +108,7 @@ function doCalendar($month, $year, $location)  {
 
           printf("<div class='day %s' id='%s'>", $class, $id);
             //increment count each time you place down a day
-            printf("<a href='day.php?day=%s'><b>%s</b></a><br>", $id, $count++);
+            printf("<a href='day.php?day=%s&location=%s'><b>%s</b></a><br>", $id, $location, $count++);
             showEvents($id, $day, $location, NULL, 'calendar');
             //if youre past the number of days, start current month
           echo "</div>"; //close day div
@@ -144,7 +144,7 @@ function doCalendar($month, $year, $location)  {
           }
 
           printf("<div class='day %s' id='%s'>", $class, $id);
-   	        printf("<a href='day.php?day=%s'><b>%s</b></a><br>", $id, $count++);
+   	        printf("<a href='day.php?day=%s&location=%s'><b>%s</b></a><br>", $id, $location, $count++);
             showEvents($id, $day, $location, NULL, 'calendar');
   		    echo "</div>"; //close day div
         }
@@ -183,12 +183,30 @@ function showEvents($date, $day, $location, $time, $flag)  {
   $result = queryDB($table, $headers, $conditions);
 
 	if ($result->num_rows > 0) {
+
+    $count = 0;
+    $
 		while($row = $result->fetch_assoc()) {
-			if($row['Type'] == 'Game') $symbol = $GLOBALS['symbols']['spade'];
-			else if($row['Type'] == 'Lesson') $symbol = $GLOBALS['symbols']['heart'];
-			else if($row['Type'] == 'Other') $symbol = $GLOBALS['symbols']['diamond'];
-			else $symbol = $GLOBALS['symbols']['club'];
-			echo $symbol . "<a href='../schedule/event.php?post=" . $row['ID'] . "'>" . $row['Name'] . '</a><br><br>';
+      if($flag == 'single')  {
+        if($row['Type'] == 'Game') $symbol = $GLOBALS['symbols']['spade'];
+  			else if($row['Type'] == 'Lesson') $symbol = $GLOBALS['symbols']['heart'];
+  			else if($row['Type'] == 'Other') $symbol = $GLOBALS['symbols']['diamond'];
+  			else $symbol = $GLOBALS['symbols']['club'];
+        printf("%s<a href='../schedule/event.php?post=%s&date=%s'>%s</a>: %s<br><br>", $symbol, $row['ID'], $date, $row['Name'], $row['Description']);
+  			//echo $symbol . "<a href='../schedule/event.php?post=" . $row['ID'] . "'>" . $row['Name'] . '</a><br><br>';
+      }
+      else if($flag == 'calendar' && $count < 2)  {
+        $count++;
+        if($row['Type'] == 'Game') $symbol = $GLOBALS['symbols']['spade'];
+  			else if($row['Type'] == 'Lesson') $symbol = $GLOBALS['symbols']['heart'];
+  			else if($row['Type'] == 'Other') $symbol = $GLOBALS['symbols']['diamond'];
+  			else $symbol = $GLOBALS['symbols']['club'];
+        printf("%s<a href='../schedule/event.php?post=%s&date=%s'>%s</a><br>", $symbol, $row['ID'], $date, $row['Name']);
+      }
+      else if($count >= 2)  {
+        printf("<a href='day.php?day=%s&location=%s'><b>View More</b></a><br>", $date, $location);
+      }
+
 		}
 	}
 }
@@ -199,10 +217,10 @@ function doSingleDay($date, $location)  {
   $day = $dateObj['weekday'];
 
   printf("<div class='dayHeader'><h3 class='centerText'>%s</h3></div>", getTextDate($date));
-
+  echo "<h1>Events at " . $location . "</h1>";
   $table = "TimeSlots";
   $headers = NULL;
-  $conditions = sprintf("Day='%s'", $day);
+  $conditions = sprintf("Day='%s' AND Location='%s'", $day, $location);
   $result = queryDB($table, $headers, $conditions);
 
   if ($result->num_rows > 0) {

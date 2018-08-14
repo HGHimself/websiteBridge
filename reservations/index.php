@@ -1,4 +1,4 @@
-
+<?php include "init.php"; ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -12,19 +12,60 @@
 			<div class='row'>
 				<div class='leftcolumn'>
 					<div class='card'>
-						<h2>TestPage</h2>
-						<h3><a href="#">Link</a></h3>
+						<h2>Make Reservations</h2>
+						<h3><a href="#">View My Reservations</a></h3>
 					</div>
 					<div class='card'>
-            <?php
-            $year = '2018';
-            echo $result = findLeapYear($year);
-            if($result === TRUE)  {
-              echo 'yeet';
-              $monthDays['February'] = 29;
-            }
+            <form id='signupform' class='centerText' action='' method='post'>
+							<label>Your Name:</label>
+							<input name='player' type='text' required>
+							<br>
+							<br>
+							<label>Partner's Name:</label>
+							<input name='partner' type='text'>
+							<br>
+							<br>
+							<label>Preferred Direction:</label>
+							<select name='direction' required>
+								<option value='N/S'>North/South</option>
+								<option value='E/W'>East/West</option>
+							</select>
+							<br>
+							<br>
+							<label>Date:</label>
+							<input name='date' type='date' required>
+							<br>
+							<br>
+              <script>
+                function runAJAX()  {
+                  var day = document.getElementById("date").value
+                  var url = "init.php?"
+                  url += "date=" + date
+                  url += "&function=getTimes"
+                  loadDoc(url, 'times')
+                }
+                $( document ).ready(function() {
+                  //runAJAX()
+                });
 
-            ?>
+                document.getElementById("date").addEventListener('change', (event) => {
+                  runAJAX()
+                })
+              </script>
+							<label>Time:</label>
+							<select name='time' id='times' required>
+							</select>
+							<br>
+							<br>
+							<label>Game:</label>
+							<select name='event' required>
+								
+							</select>
+							<br>
+							<br>
+							<?php echo $message . "<br>"; ?>
+							<input name='submit' type='submit'>
+						</form>
 					</div>
 				</div>
 				<?php include $pathToRoot . $incLocation . "sidebar.php"; ?>

@@ -231,11 +231,18 @@ main {
 /* not a day in the current month (for calendar) */
 .notMonth {
   background-color: var(--lightGrey);
+  height: 100px;
 }
 
 /* if the calendar day is today, make it stand out */
 .isToday {
   background-color: var(--lightGreen);
+  height: 100px;
+}
+
+/* if the calendar day is today, make it stand out */
+.isMonth {
+  height: 100px;
 }
 
 /* make the div be centered in the container */
